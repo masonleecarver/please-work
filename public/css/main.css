@@ -1,0 +1,80 @@
+/* header font = Dongle
+other fonts = Englebert */
+
+html, body {
+    background-color: lightblue;
+    font-family: "Dongle";
+    font-size: 1.5em;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+main {
+    margin-bottom: 40px;
+}
+
+h1 {
+    font-family: "Englebert";
+    font-size: 2.5em;
+    color: rgb(39, 9, 121);
+    }
+
+nav {
+    background-color: #0066cc;
+    display: flex;
+    width: 100%; 
+}
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav li {
+    display: inline-block;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 10px;
+    background-color: #0066cc;
+    border-radius: 40px;
+}
+
+nav a:hover {
+        color: #0066cc;
+        background-color: #97d0da;
+    }
+
+
+main li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+main li img {
+    height: 75px;
+    width: auto;
+    margin-right: 10px;
+}
+
+footer {
+    flex: 1;
+    background-color: #0066cc;
+    color:#ffffff;
+    bottom: 0;
+    width: 100%;
+}

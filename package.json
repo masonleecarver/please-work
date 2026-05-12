@@ -1,0 +1,28 @@
+{
+  "name": "please-work",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/masonleecarver/please-work#readme",
+  "bugs": {
+    "url": "https://github.com/masonleecarver/please-work/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/masonleecarver/please-work.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ejs": "^5.0.2",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
