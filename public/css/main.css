@@ -71,6 +71,26 @@ main li img {
     margin-right: 10px;
 }
 
+.project-card {
+    display: inline-block;
+    background-color: #0066cc;
+    color: #fff;
+    box-shadow: #0066cc;
+    margin: 20px;
+    border-radius: 10px;
+    max-width: 300px;
+    padding: 20px;
+}
+
+.project-card h3 {
+    font-family: "Englebert";
+    margin-bottom: 50px;
+}
+
+.project-card p {
+    margin-top: -50px;
+}
+
 footer {
     flex: 1;
     background-color: #0066cc;

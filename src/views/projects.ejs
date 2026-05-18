@@ -3,10 +3,20 @@
 <main>
     <h1><%= title %></h1>
     <h2>Available Service Projects</h2>
-    <ul>
-        <li>Park Cleanup - Join us to clean up local parks and make them beautiful!</li>
-        <li>Food Drive - Help collect and distribute food to those in need.</li>
-        <li>Community Tutoring - Volunteer to tutor students in various subjects.</li>
-    </ul>
+
+    <% projects.forEach(project => { %>
+
+        <div class="project-card">     
+            <h3><%= project.title %></h3>
+            <p style="color:aqua">What:</p>
+            <p><%= project.description %></p>
+            <p style="color:aqua">Where:</p>
+            <p><%= project.address %></p>
+            <p style="color:aqua">When:</p>
+            <p><%= new Date(project.date).toLocaleDateString('en-US') %></p>
+        </div>
+
+    <% }); %>
+
 </main>
 <%- include('partials/footer') %>
