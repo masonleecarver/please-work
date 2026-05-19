@@ -95,3 +95,33 @@ VALUES
  '2026-09-25');
 
  select * from service_project;
+
+-- ========================================
+-- other
+-- ========================================
+
+INSERT INTO category (name) VALUES
+('Enviromental'),
+('Educational'),
+('Community Service'),
+('Health and Wellness');
+
+INSERT INTO service_project_categories
+(project_id, category_id)
+VALUES
+(1, 3),
+(2, 1),(2, 3),
+(3, 3),(3, 2),
+(4, 3),
+(5, 1),(5, 3),
+(6, 1),(6, 4),
+(7, 1),
+(8, 1), (8, 2), (8, 3), (8, 4),
+(9, 1), (9, 2),
+(10, 3), (10, 4),
+(11, 1), (11, 3),
+(12, 3), 
+(13, 3),
+(14, 2),
+(15, 4);
+

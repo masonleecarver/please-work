@@ -4,6 +4,9 @@ import path from 'path';
 import { testConnection } from './src/models/db.js';
 import { getAllOrganizations } from './src/models/organizations.js';
 import { getAllProjects } from './src/models/projects.js';
+import { getAllCategories } from './src/models/categories.js';
+import { get } from 'http';
+import { error } from 'console';
 
 // Define the the application environment
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
@@ -51,6 +54,15 @@ app.get('/projects', async (req, res) => {
 
 app.get('/categories', async (req, res) => {
     const title = 'Categories';
+    const categories = getAllCategories();
+
+    try {
+      console.log(categories);
+    }
+    catch {
+      console.log("Error, sometthing went wrong idiot: ", error)
+    }
+
     res.render('categories', { title });
 });
 

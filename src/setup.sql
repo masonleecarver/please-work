@@ -25,4 +25,27 @@ CREATE TABLE service_project (
         REFERENCES organization(organization_id)
 );
 
+CREATE TABLE category (
+	category_id SERIAL PRIMARY KEY,
+	name VARCHAR(150) NOT NULL
+);
+
+CREATE TABLE service_project_categories (
+	project_id INT NOT NULL, 
+	category_id INT NOT NULL, 
+
+	PRIMARY KEY (project_id, category_id),
+
+	CONSTRAINT fk_service_project_categories_service_project
+		FOREIGN KEY (project_id)
+		REFERENCES service_project(service_project_id)
+		ON DELETE CASCADE,
+
+	CONSTRAINT fk_service_project_categories_category
+		FOREIGN KEY (category_id)
+		REFERENCES category(category_id)
+		ON DELETE CASCADE
+		
+)
+
 
