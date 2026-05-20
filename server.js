@@ -54,16 +54,9 @@ app.get('/projects', async (req, res) => {
 
 app.get('/categories', async (req, res) => {
     const title = 'Categories';
-    const categories = getAllCategories();
+    const categories = await getAllCategories();
 
-    try {
-      console.log(categories);
-    }
-    catch {
-      console.log("Error, sometthing went wrong idiot: ", error)
-    }
-
-    res.render('categories', { title });
+    res.render('categories', { title, categories });
 });
 
 app.listen(PORT, async () => {

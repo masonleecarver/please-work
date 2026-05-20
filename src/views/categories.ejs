@@ -5,12 +5,27 @@
 
     <h2>Pick any catergory that suits you!</h2>
 
-    <ul>
-        <li>Enviromental</li>
-        <li>Educational</li>
-        <li>Community Service</li>
-        <li>Health and Wellness</li>
-    </ul>
+
+    <!-- <% categories.forEach(cat => { %>
+
+        <div class="cat-card">
+            <h3><%= cat.category_name %></h3>
+            <p><%= cat.project_name %></p>
+        </div>
+
+    <% }); %> -->
+
+   <% categories.forEach(cat => { %>
+        <div class="cat-card">
+            <h3><%= cat.category_name %></h3>
+
+            <ul>
+                <% cat.projects.forEach(project => { %>
+                    <li><%= project %></li>
+                <% }) %>
+            </ul>
+        </div>
+    <% }) %> 
 
 </main>
 

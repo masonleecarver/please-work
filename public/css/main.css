@@ -91,6 +91,21 @@ main li img {
     margin-top: -50px;
 }
 
+.cat-card {
+    display: inline-block;
+    background-color: #a2d89b;
+    color: #fff;
+    box-shadow: #0066cc;
+    margin: 20px;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.cat-card p {
+    display: inline;
+}
+
 footer {
     flex: 1;
     background-color: #0066cc;
