@@ -1,9 +1,20 @@
 /* header font = Dongle
 other fonts = Englebert */
 
+/* colors: 
+
+light pink: #eacbd2
+dark purple: #011638
+pink: #DD9AC2
+brown: #916953
+blue: #2d727e
+
+*/
+
 html, body {
-    background-color: lightblue;
+    background-color: #eacbd2;
     font-family: "Bubblegum Sans";
+    box-sizing: border-box;
     font-size: 1.25em;
     margin: 0;
     padding: 0;
@@ -20,14 +31,29 @@ main {
     margin-bottom: 40px;
 }
 
+main a {
+    text-decoration: none;
+    text-align: center;
+    color: #916953;
+}
+
+main a:hover {
+    color: #2d727e;
+}
+
+main ul {
+    text-align: center;
+    padding: 0;
+}
+
 h1 {
     font-family: "Englebert";
     font-size: 2.5em;
-    color: rgb(39, 9, 121);
+    color: #011638;
     }
 
 nav {
-    background-color: #0066cc;
+    background-color: #011638;
     display: flex;
     width: 100%; 
 }
@@ -45,16 +71,16 @@ nav li {
 
 nav a {
     text-decoration: none;
-    color: #333;
+    color: #DD9AC2;
     font-weight: bold;
     padding: 10px;
-    background-color: #0066cc;
+    background-color: #011638;
     border-radius: 40px;
 }
 
 nav a:hover {
-        color: #0066cc;
-        background-color: #97d0da;
+        color:  #011638;
+        background-color: #eacbd2;
     }
 
 
@@ -73,9 +99,9 @@ main li img {
 
 .project-card {
     display: inline-block;
-    background-color: #0066cc;
+    background-color: #916953;
     color: #fff;
-    box-shadow: #0066cc;
+    box-shadow: #DD9AC2;
     margin: 20px;
     border-radius: 10px;
     max-width: 350px;
@@ -93,28 +119,32 @@ main li img {
 }
 
 .project-card a:hover {
-    color: aqua;
+    color: #DD9AC2;
 }
 
 .cat-card {
-    display: inline-block;
-    background-color: #a2d89b;
+    display: block;
+    background-color: #2d727e;
     color: #fff;
-    box-shadow: #0066cc;
+    box-shadow: #916953;
     margin: 20px;
     border-radius: 10px;
     padding: 20px;
     text-align: center;
 }
 
-.cat-card p {
-    display: inline;
+.cat-card a {
+    color:#333;
+}
+
+.cat-card a:hover {
+    color:#fff;
 }
 
 footer {
     flex: 1;
-    background-color: #0066cc;
-    color:#ffffff;
+    background-color: #011638;
+    color:#DD9AC2;
     bottom: 0;
     width: 100%;
 }

@@ -125,3 +125,38 @@ VALUES
 (14, 2),
 (15, 4);
 
+INSERT INTO organization
+(name, description, contact_email, logo_filename)
+VALUES
+('Looking For Lennie',
+'Helping people find themselves.',
+'bigbossman@lookforlennie.org',
+'lennie-logo.png');
+
+INSERT INTO service_project
+(organization_id, title, description, address, date)
+VALUES
+(4, 'Culture Night',
+'Learn about people from all over the world',
+'243 Roadkill RD, Gravity Falls, OR',
+'2026-06-13'),
+
+(4, 'Journaling Journey',
+'Scribbling with knives',
+'13472 Wallaby WY, Death Valley, CA',
+'2026-12-30'),
+
+(4, 'Painting The Town Red',
+'Pleasent mural making',
+'Skinwalker Ranch, UT',
+'2026-10-31'),
+
+(4, 'Pride Parade',
+'Showing Support in a town where no one else will.',
+'Main ST, Randolph, UT',
+'2026-06-27'),
+
+(4,'If You Know, You Know.',
+'You Know',
+'If You Know',
+'2000-01-01');

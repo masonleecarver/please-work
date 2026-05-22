@@ -7,12 +7,11 @@
         
         
         <div class="project-card">     
-            <p style="color:aqua">What:</p>
             <p><%= projectDetails.description %></p>
-            <p style="color:aqua">Where:</p>
-            <p><%= projectDetails.address %></p>
-            <p style="color:aqua">When:</p>
+            <p>At: <%= projectDetails.address %></p>
             <p><%= new Date(projectDetails.date).toLocaleDateString('en-US') %></p>
+            <p>Hosted By:</p>
+            <a href="/organization/<%= projectDetails.organization_id %>">These Guys B3</a>
         </div>
 
 

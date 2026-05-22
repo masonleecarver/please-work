@@ -73,8 +73,12 @@ const getProjectDetails = async (projectId) => {
       title,
       address,
       date,
-      description
+      description,
+      o.name AS organization_name
     FROM service_project
+    
+    LEFT JOIN organization o ON service_project.organization_id = o.organization_id
+    
     WHERE service_project_id = $1;
   `;
 
