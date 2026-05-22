@@ -2,7 +2,7 @@
 
 <main>
     <h1><%= title %></h1>
-    <h2>Available Service Projects</h2>
+    <h2>Upcoming Service Projects</h2>
 
     <% projects.forEach(project => { %>
 
@@ -14,6 +14,8 @@
             <p><%= project.address %></p>
             <p style="color:aqua">When:</p>
             <p><%= new Date(project.date).toLocaleDateString('en-US') %></p>
+            <p style="color:aqua">Hosted By:</p>
+            <a href="/organization/<%= project.organization_id %>"><%= project.organization_name %></a>
         </div>
 
     <% }); %>

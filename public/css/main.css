@@ -3,8 +3,8 @@ other fonts = Englebert */
 
 html, body {
     background-color: lightblue;
-    font-family: "Dongle";
-    font-size: 1.5em;
+    font-family: "Bubblegum Sans";
+    font-size: 1.25em;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -78,7 +78,7 @@ main li img {
     box-shadow: #0066cc;
     margin: 20px;
     border-radius: 10px;
-    max-width: 300px;
+    max-width: 350px;
     padding: 20px;
 }
 
@@ -87,8 +87,13 @@ main li img {
     margin-bottom: 50px;
 }
 
-.project-card p {
-    margin-top: -50px;
+.project-card a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.project-card a:hover {
+    color: aqua;
 }
 
 .cat-card {
