@@ -68,16 +68,16 @@ const getUpcomingProjects = async(number_of_projects) => {
 const getProjectDetails = async (projectId) => {
   const query = `
     SELECT
-      service_project_id,
-      organization_id,
-      title,
-      address,
-      date,
-      description,
+      sp.service_project_id,
+      sp.organization_id,
+      sp.title,
+      sp.address,
+      sp.date,
+      sp.description,
       o.name AS organization_name
-    FROM service_project
+    FROM service_project sp
     
-    LEFT JOIN organization o ON service_project.organization_id = o.organization_id
+    LEFT JOIN organization o ON sp.organization_id = o.organization_id
     
     WHERE service_project_id = $1;
   `;
