@@ -41,7 +41,7 @@ const getProjectsByCategory = async(categoryID) => {
             sp.description,
             sp.address,
             sp.date,
-            c.category_id AS category_id
+            c.category_id AS category_id,
             c.name AS category_name
         FROM service_project sp
 
