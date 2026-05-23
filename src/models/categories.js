@@ -47,7 +47,7 @@ const getProjectsByCategory = async(categoryID) => {
 
         INNER JOIN service_project_categories spc ON sp.service_project_id = spc.project_id
 
-        INNER JOIN category c ON spc.category_id = c.category.id
+        INNER JOIN category c ON spc.category_id = c.category_id
 
         WHERE c.category_id = $1;
     
