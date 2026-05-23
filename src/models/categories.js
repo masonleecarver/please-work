@@ -15,6 +15,7 @@ const getAllCategories = async() => {
 
 const getProjectsByCategory = async(categoryID) => {
 
+    /*
     const query = `
         SELECT
             sp.service_project_id,
@@ -30,6 +31,26 @@ const getProjectsByCategory = async(categoryID) => {
         
         WHERE spc.category_id = $1;
         
+    `;
+    */
+
+    const query = `
+        SELECT
+            sp.service_project_id,
+            sp.title,
+            sp.description,
+            sp.address,
+            sp.date,
+            c.category_id AS category_id
+            c.name AS category_name
+        FROM service_project sp
+
+        INNER JOIN service_project_categories spc ON sp.service_project_id = spc.project_id
+
+        INNER JOIN category c ON sp.category_id = c.category.id
+
+        WHERE sp.category_id = $1;
+    
     `;
 
     const queryParams = [categoryID];
