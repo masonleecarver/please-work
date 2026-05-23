@@ -11,6 +11,22 @@ const getAllCategories = async() => {
     const results = await db.query(query);
 
     return results.rows;
+};
+
+const getCategoryById = async (categoryID) => {
+    const query = `
+        SELECT
+            category_id,
+            name
+        FROM category
+        WHERE category_id = $1;
+    `;
+
+    const queryParams = [categoryID];
+    const result = await db.query(query, queryParams);
+
+    return result.rows.length > 0 ? result.rows[0] : null;
+
 }
 
 const getProjectsByCategory = async(categoryID) => {
@@ -61,4 +77,4 @@ const getProjectsByCategory = async(categoryID) => {
 }
 
 
-export {getAllCategories, getProjectsByCategory}; 
+export {getAllCategories, getProjectsByCategory, getCategoryById}; 
