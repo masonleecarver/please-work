@@ -1,5 +1,7 @@
 import db from './db.js'
 
+//#region get
+
 const getAllCategories = async() => {
     const query = `
         SELECT 
@@ -27,28 +29,9 @@ const getCategoryById = async (categoryID) => {
 
     return result.rows.length > 0 ? result.rows[0] : null;
 
-}
+};
 
 const getProjectsByCategory = async(categoryID) => {
-
-    /*
-    const query = `
-        SELECT
-            sp.service_project_id,
-            c.category_id,
-            c.name AS category_name, 
-            sp.title AS project_name
-            
-        FROM service_project_categories spc
-        
-        INNER JOIN category c ON spc.category_id = c.category_id
-        
-        INNER JOIN service_project sp ON spc.project_id = sp.service_project_id
-        
-        WHERE spc.category_id = $1;
-        
-    `;
-    */
 
     const query = `
         SELECT
@@ -74,7 +57,37 @@ const getProjectsByCategory = async(categoryID) => {
 
     return result.rows;
 
+};
+
+//#endregion
+
+//#region assign
+
+const assignCategoryToProject = async (projectID, categoryID) => {
+    const query = `
+        INSERT INTO service_project_categories
+        (project_id, category_id)
+        VALUES
+        ($1, $2);
+    `;
+
+    const queryParams = [projectID, categoryID];
+    await db.query(query, queryParams);
+}
+
+const updateCategoryAssignment = async (projectID, categoryIDs) => {
+    const deleteQuery = `
+        DELETE FROM service_project_categories
+        WHERE project_id = $1;
+    `;
+
+    await db.query(deleteQuery, [projectID]);
+
+    for (const categoryID of categoryIDs) {
+        await assignCategoryToProject(projectID, categoryID);
+    }
 }
 
 
-export {getAllCategories, getProjectsByCategory, getCategoryById}; 
+
+export {getAllCategories, getProjectsByCategory, getCategoryById, updateCategoryAssignment}; 

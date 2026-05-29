@@ -160,3 +160,13 @@ VALUES
 'You Know',
 'If You Know',
 '2000-01-01');
+
+INSERT INTO service_project_categories
+(project_id, category_id)
+VALUES
+(20, 2), (20, 1), (20, 4),
+(16, 2), (16, 3),
+(19, 4), (19, 2),
+(18, 1),
+(17, 4);
+
