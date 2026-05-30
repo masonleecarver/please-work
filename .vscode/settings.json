@@ -3,5 +3,11 @@
     "editor.inlineSuggest.suppressSuggestions": true,
     "editor.inlineSuggest.edits.showLongDistanceHint": false,
     "editor.inlineSuggest.experimental.emptyResponseInformation": false,
-    "chat.disableAIFeatures": true
+    "chat.disableAIFeatures": true,
+    "files.exclude": {
+        "**/*.rpyc": true,
+        "**/*.rpa": true,
+        "**/*.rpymc": true,
+        "**/cache/": true
+    }
 }

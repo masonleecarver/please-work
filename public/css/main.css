@@ -97,6 +97,7 @@ main li img {
     margin-right: 10px;
 }
 
+
 .project-card {
     display: inline-block;
     background-color: #916953;
@@ -122,6 +123,11 @@ main li img {
     color: #DD9AC2;
 }
 
+.alone {
+    display: block;
+    margin: 0 auto;
+}
+
 .cat-card {
     display: block;
     background-color: #2d727e;
@@ -139,6 +145,49 @@ main li img {
 
 .cat-card a:hover {
     color:#fff;
+}
+
+form {
+    text-align: center;
+    background-color: #916953;
+    color: #eacbd2;
+    padding: 20px;
+    margin: 40px;
+    border-radius: 15px;
+}
+
+form label {
+    display: block;
+    text-align: center;
+}
+
+form input, form textarea, form select, form button {
+    padding: 15px;
+    font-family: "Bubblegum Sans";
+    width: 90%;
+    margin: 20px;
+    border-radius: 15px;
+    font-size: 18px;
+    border: none;
+    text-align: center;
+}
+
+input:focus, textarea:focus, select:focus {
+    border: 2px solid #DD9AC2;
+}
+
+option:focus {
+    background-color: #eacbd2;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+form button:hover {
+    cursor: pointer;
+    background-color: #DD9AC2;
+    color: #fff;
 }
 
 footer {

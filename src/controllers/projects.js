@@ -1,5 +1,5 @@
 // Import any needed model functions
-import { getUpcomingProjects, getProjectDetails, createProject } from '../models/projects.js';
+import { getUpcomingProjects, getProjectDetails, createProject, updateProject } from '../models/projects.js';
 import { getAllOrganizations } from '../models/organizations.js';
 import { body, validationResult } from 'express-validator';
 
@@ -30,6 +30,19 @@ const showNewProjectForm = async (req, res) => {
     res.render('new-project', { title, organizations });
 }
 
+const showEditProjectForm = async (req, res) => {
+    const projectId = req.params.id;
+    const projectDetails = await getProjectDetails(projectId);
+    const organizations = await getAllOrganizations();
+    const title = "Edit Service Project";
+    
+    res.render('update-project', {title, projectDetails, organizations});
+}
+
+//#endregion
+
+//#region process
+
 const processNewProjectForm = async (req, res) => {
     // Extract form data from req.body
     const { title, description, address, date, organizationId } = req.body;
@@ -47,6 +60,33 @@ const processNewProjectForm = async (req, res) => {
     }
 
      // Check for validation errors
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        // Loop through validation errors and flash them
+        errors.array().forEach((error) => {
+            req.flash('error', error.msg);
+        });
+
+        // Redirect back to the new project form
+        return res.redirect('/new-project');
+    }
+}
+
+const processEditProjectForm = async (req, res) => {
+    const {title, description, address, date, organizationId} = req.body;
+    const projectId = req.params.id;
+    
+    try {
+        await updateProject(title, organizationId, description, address, date, projectId);
+
+        req.flash('success', 'Service project updated successfully!');
+        res.redirect(`/project/${projectId}`);
+    } catch (error) {
+        console.error ('Error updating project:', error);
+        req.flash('error', 'There was an issue updating this project....');
+        res.redirect('/update-project');
+    }
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         // Loop through validation errors and flash them
@@ -87,4 +127,4 @@ const projectValidation = [
 //#endregion
 
 // Export any controller functions
-export { showProjectsPage, showProjectDetails, showNewProjectForm, processNewProjectForm, projectValidation };
+export { showProjectsPage, showProjectDetails, showNewProjectForm, processNewProjectForm, projectValidation, showEditProjectForm, processEditProjectForm };
