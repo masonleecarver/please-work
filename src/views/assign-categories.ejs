@@ -13,6 +13,7 @@
             id="category-<%= category.category_id %>"
             name="categoryIds"
             value="<%= category.category_id %>"
+            <%= assignedCategories.some(ac => ac.category_id === category.category_id) ? 'checked' : '' %>
           />
           <label for="category-<%= category.category_id %>"><%= category.name %></label>
         </div>

@@ -10,5 +10,8 @@
             <li><a href="/project/<%= project.service_project_id %>"><%= project.title %></a></li>
         <% }) %>
     </ul>
+
+    <a href="/edit-category/<%= catDetails.category_id %>">Edit Category</a>
+
 </main>
 <%- include('partials/footer') %>

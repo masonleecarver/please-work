@@ -59,6 +59,28 @@ const getProjectsByCategory = async(categoryID) => {
 
 };
 
+const getCategoriesByProject = async (projectID) => {
+    
+    const query = `
+        SELECT 
+            c.name,
+            c.category_id,
+            sp.service_project_id AS project_id,
+            sp.title AS project_title
+        FROM category c
+
+        INNER JOIN service_project_categories spc ON c.category_id = spc.category_id
+
+        INNER JOIN service_project sp ON spc.project_id = sp.service_project_id
+
+        WHERE sp.service_project_id = $1;
+    `;
+
+    const result = await db.query(query, [projectID]);
+
+    return result.rows;
+}
+
 //#endregion
 
 //#region assign
@@ -88,6 +110,59 @@ const updateCategoryAssignment = async (projectID, categoryIDs) => {
     }
 }
 
+//#endregion
+
+//#region create and edit
+
+const createCategory = async (name) => {
+
+    const query = `
+        INSERT INTO category 
+        (name)
+        VALUES
+        ($1)
+
+        RETURNING category_id;
+    `;
+
+    const result = await db.query(query, [name]);
+
+    if (result.rows.length === 0) {
+        throw new Error('Failed to create category');
+    }
+
+    if (process.env.ENABLE_SQL_LOGGING === 'true') {
+        console.log('Created new category with ID:', result.rows[0].category_id);
+    }
+
+    return result.rows[0].category_id;    
+};
+
+const editCategory = async (name, catId) => {
+
+    const query = `
+        UPDATE category
+        SET name = $1
+        WHERE category_id = $2
+
+        RETURNING category_id;
+    `;
+
+    const result = await db.query(query, [name, catId]);
+
+    if (result.rows.length === 0) {
+        throw new Error('Category not found');
+    }
+
+    if (process.env.ENABLE_SQL_LOGGING === 'true') {
+        console.log('Updated category with ID:', projectId);
+    }
+
+    return result.rows[0].category_id;
+    
+}
+
+//#endregion
 
 
-export {getAllCategories, getProjectsByCategory, getCategoryById, updateCategoryAssignment}; 
+export {getAllCategories, getProjectsByCategory, getCategoryById, getCategoriesByProject, updateCategoryAssignment, createCategory, editCategory}; 

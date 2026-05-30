@@ -1,10 +1,24 @@
+//#region imports
+
 import express from 'express';
 
 import { showHomePage } from './controllers/index.js';
+
+// import from organization 
+
 import { showOrganizationsPage, showOrganizationDetailsPage, showNewOrganizationForm, processNewOrganizationForm, organizationValidation, showEditOrganizationForm, processEditOrganizationForm } from './controllers/organizations.js';
+
+// import from projects
+
 import { showProjectsPage, showProjectDetails, showNewProjectForm, processNewProjectForm, projectValidation,showEditProjectForm, processEditProjectForm } from './controllers/projects.js';
-import { showCategoriesPage, showProjectCategories, showAssignCategoriesForm, processAssignCategoriesForm } from './controllers/categories.js';
+
+// import from categories
+
+import { showCategoriesPage, showProjectCategories, showAssignCategoriesForm, processAssignCategoriesForm, showNewCategoryPage, processNewCategoryPage, categoryValidation, showEditCategoryPage, processEditCategoryPage } from './controllers/categories.js';
+
 import { testErrorPage } from './controllers/errors.js';
+
+//#endregion
 
 
 const router = express.Router();
@@ -42,6 +56,10 @@ router.get('/category/:id', showProjectCategories);
 // Routes to handle the assign categories to project form
 router.get('/assign-categories/:id', showAssignCategoriesForm);
 router.post('/assign-categories/:id', processAssignCategoriesForm);
+router.get('/new-category', showNewCategoryPage);
+router.post('/new-category', categoryValidation, processNewCategoryPage);
+router.get('/edit-category/:id', showEditCategoryPage);
+router.post('/edit-category/:id', categoryValidation, processEditCategoryPage);
 
 //#endregion
 
