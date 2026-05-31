@@ -155,7 +155,7 @@ const editCategory = async (name, catId) => {
     }
 
     if (process.env.ENABLE_SQL_LOGGING === 'true') {
-        console.log('Updated category with ID:', projectId);
+        console.log('Updated category with ID:', catId);
     }
 
     return result.rows[0].category_id;

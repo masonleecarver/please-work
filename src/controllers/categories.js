@@ -100,12 +100,12 @@ const processEditCategoryForm = async (req, res) => {
     try {
         await editCategory(name, categoryID);
 
-        req.flash('success', 'Service project updated successfully!');
+        req.flash('success', 'Category updated successfully!');
         res.redirect(`/category/${categoryID}`);
     } catch (error) {
-        console.error ('Error updating project:', error);
-        req.flash('error', 'There was an issue updating this project....');
-        res.redirect('/edit-category');
+        console.error ('Error updating category:', error);
+        req.flash('error', 'There was an issue updating this category....');
+        res.redirect('/new-category');
     }
 
     const errors = validationResult(req);
