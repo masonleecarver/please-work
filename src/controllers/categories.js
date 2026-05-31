@@ -93,18 +93,18 @@ const processNewCategoryPage = async (req, res) => {
 
 };
 
-const processEditCategoryPage = async (req, res) => {
-    const categoryID = req.params.id;
+const processEditCategoryForm = async (req, res) => {
     const {name} = req.body;
-
+    const categoryID = req.params.id;
+    
     try {
         await editCategory(name, categoryID);
 
-        req.flash('success', 'Category updated successfully!');
+        req.flash('success', 'Service project updated successfully!');
         res.redirect(`/category/${categoryID}`);
     } catch (error) {
-        console.error('Error updating category:', error);
-        req.flash('error', 'There was an error updating the category.');
+        console.error ('Error updating project:', error);
+        req.flash('error', 'There was an issue updating this project....');
         res.redirect('/edit-category');
     }
 
@@ -116,8 +116,7 @@ const processEditCategoryPage = async (req, res) => {
         });
 
         // Redirect back to the new project form
-        return res.redirect('/new-project');
-    
+        return res.redirect('/new-category');
     }
 }
 
@@ -131,4 +130,4 @@ const categoryValidation = [
 //#endregion
 
 // Export any controller functions
-export { showCategoriesPage, showProjectCategories, showAssignCategoriesForm, processAssignCategoriesForm, showNewCategoryPage, processNewCategoryPage, categoryValidation, showEditCategoryPage, processEditCategoryPage };
+export { showCategoriesPage, showProjectCategories, showAssignCategoriesForm, processAssignCategoriesForm, showNewCategoryPage, processNewCategoryPage, categoryValidation, showEditCategoryPage, processEditCategoryForm };
