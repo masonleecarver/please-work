@@ -48,4 +48,26 @@ CREATE TABLE service_project_categories (
 		
 )
 
+-- ========================
+
+-- roles and users tables
+
+-- =================
+
+
+CREATE TABLE role (
+	role_id SERIAL PRIMARY KEY,
+	name VARCHAR NOT NULL, 
+	description TEXT NOT NULL
+);
+
+CREATE TABLE users (
+	user_id SERIAL PRIMARY KEY,
+	name VARCHAR(100) NOT NULL,
+	email VARCHAR(100) NOT NULL,
+	password_hash VARCHAR(255) NOT NULL, 
+	role_id INTEGER REFERENCES role(role_id),
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 

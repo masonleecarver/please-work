@@ -16,6 +16,10 @@ import { showProjectsPage, showProjectDetails, showNewProjectForm, processNewPro
 
 import { showCategoriesPage, showProjectCategories, showAssignCategoriesForm, processAssignCategoriesForm, showNewCategoryPage, processNewCategoryPage, categoryValidation, showEditCategoryPage, processEditCategoryForm } from './controllers/categories.js';
 
+// import from user
+
+import { showUserRegistrationForm, processUserRegistrationForm, processLoginForm, processLogout, showLoginForm, requireLogin, showDashboard } from './controllers/users.js';
+
 import { testErrorPage } from './controllers/errors.js';
 
 //#endregion
@@ -60,6 +64,17 @@ router.get('/new-category', showNewCategoryPage);
 router.post('/new-category', categoryValidation, processNewCategoryPage);
 router.get('/edit-category/:id', showEditCategoryPage);
 router.post('/edit-category/:id', categoryValidation, processEditCategoryForm);
+
+//#endregion
+
+//#region user routes
+
+router.get('/register', showUserRegistrationForm);
+router.post('/register', processUserRegistrationForm);
+router.get('/login', showLoginForm);
+router.post('/login', processLoginForm);
+router.get('/logout', processLogout);
+router.get('/dashboard', requireLogin, showDashboard);
 
 //#endregion
 
