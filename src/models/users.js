@@ -19,9 +19,29 @@ const createUser = async (name, email, passwordHash) => {
     if (process.env.ENABLE_SQL_LOGGING === 'true') {
         console.log('Created new user with ID:', result.rows[0].user_id);
     }
-
+    
     return result.rows[0].user_id;
 };
+
+const getAllUsers = async () => {
+
+    const query = `
+        SELECT
+        u.name,
+        u.email,
+        r.name AS role
+        FROM users u
+
+        JOIN role r ON r.role_id = u.role_id; 
+    `;
+
+    const results = await db.query(query);
+
+    return results.rows;
+    
+}
+
+//#region verify
 
 const findUserByEmail = async (email) => {
     const query = `
@@ -45,6 +65,7 @@ const findUserByEmail = async (email) => {
     
     return result.rows[0];
 };
+
 
 const verifyPassword = async (password, passwordHash) => {
     return bcrypt.compare(password, passwordHash);
@@ -72,4 +93,6 @@ const authenticateUser = async (email, password) => {
 
 };
 
-export { createUser, authenticateUser };
+//#endregion
+
+export { createUser, authenticateUser, getAllUsers };

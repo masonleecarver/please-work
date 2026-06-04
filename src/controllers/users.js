@@ -1,4 +1,4 @@
-import { createUser, authenticateUser } from "../models/users.js";
+import { createUser, authenticateUser, getAllUsers } from "../models/users.js";
 import bcrypt from 'bcrypt';
 
 const showUserRegistrationForm = (req, res) => {
@@ -18,7 +18,17 @@ const showDashboard = async (req, res) => {
         email: user.email
     });
     
-}
+};
+
+const showUsers = async (req, res) => {
+    const users = await getAllUsers();
+    res.render('users', {
+        title: 'Users',
+        users
+    });
+};
+
+//#region process
 
 
 const processUserRegistrationForm = async (req, res) => {
@@ -79,6 +89,10 @@ const processLogout = async (req, res) => {
     res.redirect('/login');
 };
 
+//#endregion
+
+//#region require
+
 const requireLogin = (req, res, next) => {
     if (!req.session || !req.session.user) {
         req.flash('error', 'You must be logged in to access that page.');
@@ -104,6 +118,8 @@ const requireRole = (role) => {
         // User has required role, continue
         next();
     };
-}
+};
 
-export { showUserRegistrationForm, processUserRegistrationForm, processLoginForm, showLoginForm, processLogout, requireLogin, showDashboard, requireRole };
+//#endregion
+
+export { showUserRegistrationForm, processUserRegistrationForm, processLoginForm, showLoginForm, processLogout, requireLogin, showDashboard, requireRole, showUsers };

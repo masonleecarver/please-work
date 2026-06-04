@@ -1,5 +1,5 @@
 /* header font = Dongle
-other fonts = Englebert */
+other fonts = bubllegum sans */
 
 /* colors: 
 
@@ -10,6 +10,8 @@ brown: #916953
 blue: #2d727e
 
 */
+
+/*#region main and nav*/
 
 html, body {
     background-color: #eacbd2;
@@ -83,7 +85,6 @@ nav a:hover {
         background-color: #eacbd2;
     }
 
-
 main li {
     display: flex;
     justify-content: center;
@@ -97,6 +98,10 @@ main li img {
     margin-right: 10px;
 }
 
+/*#endregion */
+
+
+/* #region project card */
 
 .project-card {
     display: inline-block;
@@ -128,6 +133,24 @@ main li img {
     margin: 0 auto;
 }
 
+/* #endregion */
+
+.user-flex {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.user-card {
+    padding: 20px;
+    border-radius: 15px;
+    background-color: #011638;
+    color: #fff;
+    margin: 20px;
+}
+
+/* #region cat card */
+
 .cat-card {
     display: block;
     background-color: #2d727e;
@@ -146,6 +169,10 @@ main li img {
 .cat-card a:hover {
     color:#fff;
 }
+
+/* #endregion */
+
+/* #region form */
 
 form {
     text-align: center;
@@ -207,6 +234,8 @@ form button:hover {
     color: #fff;
 }
 
+/* #endregion */
+
 footer {
     flex: 1;
     background-color: #011638;
@@ -215,7 +244,7 @@ footer {
     width: 100%;
 }
 
-/* Flash message styles */
+/* #region Flash message styles */
 .alert {
     padding: 15px;
     margin-bottom: 20px;
@@ -242,3 +271,5 @@ footer {
     background-color: #d1ecf1;
     border-color: #bee5eb;
 }
+
+/* #endregion */

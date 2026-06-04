@@ -1,0 +1,22 @@
+<%- include('partials/header') %>
+
+<main>
+    <h1><%= title %></h1>
+    <h2>EVERYBODY!!</h2>
+
+    <div class="user-flex">
+    
+        <% users.forEach(user => { %>
+
+            <div class="user-card">
+                <h3>Name: <%= user.name %></h3>
+                <p>Email: <%= user.email %></p>
+                <p>Role: <%= user.role %></p>
+            </div>
+
+        <% }); %>
+
+    </div>
+
+</main>
+<%- include('partials/footer') %>
