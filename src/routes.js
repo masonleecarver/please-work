@@ -18,7 +18,7 @@ import { showCategoriesPage, showProjectCategories, showAssignCategoriesForm, pr
 
 // import from user
 
-import { showUserRegistrationForm, processUserRegistrationForm, processLoginForm, processLogout, showLoginForm, requireLogin, showDashboard } from './controllers/users.js';
+import { showUserRegistrationForm, processUserRegistrationForm, processLoginForm, processLogout, showLoginForm, requireLogin, showDashboard, requireRole } from './controllers/users.js';
 
 import { testErrorPage } from './controllers/errors.js';
 
@@ -33,10 +33,10 @@ router.get('/', showHomePage);
 
 router.get('/organizations', showOrganizationsPage);
 router.get('/organization/:id', showOrganizationDetailsPage);
-router.get('/new-organization', showNewOrganizationForm);
-router.post('/new-organization', organizationValidation, processNewOrganizationForm);
-router.get('/edit-organization/:id', showEditOrganizationForm);
-router.post('/edit-organization/:id', organizationValidation, processEditOrganizationForm);
+router.get('/new-organization', requireRole('admin'), showNewOrganizationForm);
+router.post('/new-organization', requireRole('admin'), organizationValidation, processNewOrganizationForm);
+router.get('/edit-organization/:id', requireRole('admin'), showEditOrganizationForm);
+router.post('/edit-organization/:id', requireRole('admin'), organizationValidation, processEditOrganizationForm);
 
 //#endregion
 
@@ -45,11 +45,11 @@ router.post('/edit-organization/:id', organizationValidation, processEditOrganiz
 router.get('/projects', showProjectsPage);
 router.get('/project/:id', showProjectDetails);
 // Route for new project page
-router.get('/new-project', showNewProjectForm);
+router.get('/new-project', requireRole('admin'), showNewProjectForm);
 // Route to handle new project form submission
-router.post('/new-project', projectValidation, processNewProjectForm);
-router.get('/update-project/:id', showEditProjectForm);
-router.post('/update-project/:id', projectValidation, processEditProjectForm);
+router.post('/new-project', requireRole('admin'), projectValidation, processNewProjectForm);
+router.get('/update-project/:id', requireRole('admin'), showEditProjectForm);
+router.post('/update-project/:id', requireRole('admin'), projectValidation, processEditProjectForm);
 
 //#endregion
 
@@ -58,12 +58,12 @@ router.post('/update-project/:id', projectValidation, processEditProjectForm);
 router.get('/categories', showCategoriesPage);
 router.get('/category/:id', showProjectCategories);
 // Routes to handle the assign categories to project form
-router.get('/assign-categories/:id', showAssignCategoriesForm);
-router.post('/assign-categories/:id', processAssignCategoriesForm);
-router.get('/new-category', showNewCategoryPage);
-router.post('/new-category', categoryValidation, processNewCategoryPage);
-router.get('/edit-category/:id', showEditCategoryPage);
-router.post('/edit-category/:id', categoryValidation, processEditCategoryForm);
+router.get('/assign-categories/:id', requireRole('admin'), showAssignCategoriesForm);
+router.post('/assign-categories/:id', requireRole('admin'), processAssignCategoriesForm);
+router.get('/new-category', requireRole('admin'), showNewCategoryPage);
+router.post('/new-category', requireRole('admin'), categoryValidation, processNewCategoryPage);
+router.get('/edit-category/:id', requireRole('admin'), showEditCategoryPage);
+router.post('/edit-category/:id', requireRole('admin'), categoryValidation, processEditCategoryForm);
 
 //#endregion
 

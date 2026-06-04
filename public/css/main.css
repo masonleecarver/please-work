@@ -172,6 +172,23 @@ form input, form textarea, form select, form button {
     text-align: center;
 }
 
+.check-label {
+    display: inline;
+    margin-right: 5px;
+    align-self: center;
+}
+
+form input[type="checkbox"] {
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid #DD9AC2;
+    border-radius: 0.15em;
+    align-self: center;
+    cursor: pointer;
+}
+
 input:focus, textarea:focus, select:focus {
     border: 2px solid #DD9AC2;
 }

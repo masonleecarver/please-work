@@ -8,6 +8,7 @@
     <div class="form-group">
       <% categories.forEach(category => { %>
         <div>
+          <label for="category-<%= category.category_id %>" class="check-label"><%= category.name %>:</label>
           <input
             type="checkbox"
             id="category-<%= category.category_id %>"
@@ -15,7 +16,6 @@
             value="<%= category.category_id %>"
             <%= assignedCategories.some(ac => ac.category_id === category.category_id) ? 'checked' : '' %>
           />
-          <label for="category-<%= category.category_id %>"><%= category.name %></label>
         </div>
       <% }); %>
     </div>
