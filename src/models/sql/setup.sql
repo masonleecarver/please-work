@@ -70,32 +70,25 @@ CREATE TABLE users (
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE volenteer (
-	volenteer_id SERIAL PRIMARY KEY,
-	user_id INT NOT NULL,
-
-	CONSTRAINT fk_volenteer_users
-		FOREIGN KEY (user_id)
-		REFERENCES users(user_id)
-);
-
 CREATE TABLE project_volenteers (
 	project_id INT NOT NULL, 
-	volenteer_id INT NOT NULL, 
+	user_id INT NOT NULL, 
 
-	PRIMARY KEY (project_id, volenteer_id),
+	PRIMARY KEY (project_id, user_id),
 
 	CONSTRAINT fk_project_volenteers_service_project
 		FOREIGN KEY (project_id)
 		REFERENCES service_project(service_project_id)
 		ON DELETE CASCADE,
 
-	CONSTRAINT fk_project_volenteers_volenteer
-		FOREIGN KEY (volenteer_id)
-		REFERENCES volenteer(volenteer_id)
+	CONSTRAINT fk_project_volenteers_users
+		FOREIGN KEY (user_id)
+		REFERENCES users(user_id)
 		ON DELETE CASCADE
 );
 
 INSERT INTO role (name, description) VALUES 
     ('user', 'Standard user with basic access'),
     ('admin', 'Administrator with full system access');
+
+UPDATE users SET role_id = (SELECT role_id FROM role WHERE name = 'admin') WHERE email = 'admin@example.com';

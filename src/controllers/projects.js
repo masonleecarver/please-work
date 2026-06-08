@@ -1,5 +1,6 @@
 // Import any needed model functions
-import { getUpcomingProjects, getProjectDetails, createProject, updateProject, getVolunteersByProject } from '../models/projects.js';
+import { getUpcomingProjects, getProjectDetails, createProject, updateProject } from '../models/projects.js';
+import { isVolenteered } from '../models/users.js';
 import { getAllOrganizations } from '../models/organizations.js';
 import { body, validationResult } from 'express-validator';
 
@@ -24,7 +25,7 @@ const showProjectDetails = async (req, res) => {
     let canLeave = false;
 
     if (user_id) {
-        canLeave = await getVolunteersByProject(projectID, user_id);
+        canLeave = await isVolenteered(projectID, user_id);
     };
 
     const title = 'Project Details';

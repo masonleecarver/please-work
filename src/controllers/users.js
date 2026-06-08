@@ -1,4 +1,5 @@
-import { createUser, authenticateUser, getAllUsers, volenteer, getProjectsByVolenteer, unVolenteer } from "../models/users.js";
+import { userInfo } from "os";
+import { createUser, authenticateUser, getAllUsers, addUserToProject, getProjectsByVolenteer, leaveProject } from "../models/users.js";
 import bcrypt from 'bcrypt';
 
 const showUserRegistrationForm = (req, res) => {
@@ -29,6 +30,16 @@ const showUsers = async (req, res) => {
         users
     });
 };
+
+const showUserProjects = async (req, res) => {
+    const user_id = req.params.id;
+    const projects = await getProjectsByVolenteer(user_id);
+    res.render('user-projects', {
+        title: "User Projects",
+        projects
+    });
+
+}
 
 
 //#region process
@@ -97,7 +108,7 @@ const processVolenteer = async (req, res) => {
     const project_id = req.params.id;
 
     try {
-        await volenteer(user.user_id, project_id);
+        await addUserToProject(project_id, user.user_id);
         req.flash('success', 'Thank you for volenteering!');
         res.redirect(`/project/${project_id}`);
     } catch (error) {
@@ -113,7 +124,7 @@ const processUnvolenteer = async (req, res) => {
     const project_id = req.params.id;
 
     try {
-        await unVolenteer(user.user_id, project_id);
+        await leaveProject(user.user_id, project_id);
         req.flash('success', 'We are sorry to see you go!');
         res.redirect(`/project/${project_id}`);
     } catch (error) {

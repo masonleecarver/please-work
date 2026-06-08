@@ -1,5 +1,6 @@
 // Import any needed model functions
 import { getAllCategories, getProjectsByCategory, getCategoryById, updateCategoryAssignment, getCategoriesByProject, createCategory, editCategory } from '../models/categories.js';
+
 import { getProjectDetails } from '../models/projects.js';
 import { body, validationResult } from 'express-validator';
 import flash from '../middleware/flash.js';

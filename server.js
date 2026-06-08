@@ -97,14 +97,7 @@ app.use((err, req, res, next) => {
     res.status(status).render(`errors/${template}`, context);
 });
 
-const url = new URL(process.env.DB_URL);
-
 app.listen(PORT, async () => {
-console.log({
-        host: url.hostname,
-        port: url.port,
-        database: url.pathname
-        });
   try {
     await testConnection();
     console.log(`Server is running at http://127.0.0.1:${PORT}`);
