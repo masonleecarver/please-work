@@ -46,7 +46,7 @@ CREATE TABLE service_project_categories (
 		REFERENCES category(category_id)
 		ON DELETE CASCADE
 		
-)
+);
 
 -- ========================
 
@@ -96,4 +96,6 @@ CREATE TABLE project_volenteers (
 		ON DELETE CASCADE
 );
 
-
+INSERT INTO role (name, description) VALUES 
+    ('user', 'Standard user with basic access'),
+    ('admin', 'Administrator with full system access');
