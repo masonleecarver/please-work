@@ -91,6 +91,21 @@ const getProjectDetails = async (projectId) => {
 
 };
 
+const getVolunteersByProject = async (project_id, user_id) => {
+    const query = `
+        SELECT 1
+        FROM project_volenteers pv
+        JOIN volenteer v ON v.volenteer_id = pv.volenteer_id
+        WHERE pv.project_id = $1
+          AND v.user_id = $2
+        LIMIT 1;
+    `;
+
+    const result = await db.query(query, [project_id, user_id]);
+
+    return result.rowCount > 0;
+};
+
 //#endregion
 
 const createProject = async (title, organizationId, description, address, date) => {
@@ -143,4 +158,4 @@ const updateProject = async (title, organizationId,description,address, date, pr
   return result.rows[0].service_project_id;
 };
 
-export {getAllProjects, getProjectsByOrganizationId, getUpcomingProjects, getProjectDetails, createProject, updateProject }; 
+export {getAllProjects, getProjectsByOrganizationId, getUpcomingProjects, getProjectDetails, createProject, updateProject, getVolunteersByProject }; 

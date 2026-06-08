@@ -1,4 +1,4 @@
-import { createUser, authenticateUser, getAllUsers } from "../models/users.js";
+import { createUser, authenticateUser, getAllUsers, volenteer, getProjectsByVolenteer, unVolenteer } from "../models/users.js";
 import bcrypt from 'bcrypt';
 
 const showUserRegistrationForm = (req, res) => {
@@ -12,10 +12,12 @@ const showLoginForm = async (req, res) => {
 
 const showDashboard = async (req, res) => {
     const user = req.session.user;
+    const projects = await getProjectsByVolenteer(user.user_id);
     res.render('dashboard', {
         title: 'Dashboard',
         name: user.name,
-        email: user.email
+        email: user.email,
+        projects
     });
     
 };
@@ -27,6 +29,7 @@ const showUsers = async (req, res) => {
         users
     });
 };
+
 
 //#region process
 
@@ -89,6 +92,38 @@ const processLogout = async (req, res) => {
     res.redirect('/login');
 };
 
+const processVolenteer = async (req, res) => {
+    const user = req.session.user;
+    const project_id = req.params.id;
+
+    try {
+        await volenteer(user.user_id, project_id);
+        req.flash('success', 'Thank you for volenteering!');
+        res.redirect(`/project/${project_id}`);
+    } catch (error) {
+        console.error('Error during volenteering: ', error);
+        req.flash('error', 'There was an error. Sorry :(');
+        res.redirect('/projects');
+    }
+    
+};
+
+const processUnvolenteer = async (req, res) => {
+    const user = req.session.user;
+    const project_id = req.params.id;
+
+    try {
+        await unVolenteer(user.user_id, project_id);
+        req.flash('success', 'We are sorry to see you go!');
+        res.redirect(`/project/${project_id}`);
+    } catch (error) {
+        console.error('There was an error: ', error);
+        req.flash('error', 'Error during leaving. It is a sign you should stay :)');
+        res.redirect('/projects');
+    }
+    
+};
+
 //#endregion
 
 //#region require
@@ -122,4 +157,4 @@ const requireRole = (role) => {
 
 //#endregion
 
-export { showUserRegistrationForm, processUserRegistrationForm, processLoginForm, showLoginForm, processLogout, requireLogin, showDashboard, requireRole, showUsers };
+export { showUserRegistrationForm, processUserRegistrationForm, processLoginForm, showLoginForm, processLogout, requireLogin, showDashboard, requireRole, showUsers, processVolenteer, processUnvolenteer };

@@ -234,6 +234,27 @@ form button:hover {
     color: #fff;
 }
 
+.dash-form {
+    display: inline;
+    width: fit-content;
+    background: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dash-form button {
+
+    display: inline;
+    width: fit-content;
+    padding: 10px;
+    margin: 0;
+    background-color: #2d727e;
+    color: #fff;
+
+}
+
+
+
 /* #endregion */
 
 footer {

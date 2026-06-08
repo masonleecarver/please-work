@@ -1,5 +1,5 @@
 // Import any needed model functions
-import { getUpcomingProjects, getProjectDetails, createProject, updateProject } from '../models/projects.js';
+import { getUpcomingProjects, getProjectDetails, createProject, updateProject, getVolunteersByProject } from '../models/projects.js';
 import { getAllOrganizations } from '../models/organizations.js';
 import { body, validationResult } from 'express-validator';
 
@@ -17,10 +17,19 @@ const showProjectsPage = async (req, res) => {
 
 const showProjectDetails = async (req, res) => {
     const projectID = req.params.id;
+    const user = req.session.user;
+    const user_id = user ? user.user_id : null; 
     const projectDetails = await getProjectDetails(projectID);
+
+    let canLeave = false;
+
+    if (user_id) {
+        canLeave = await getVolunteersByProject(projectID, user_id);
+    };
+
     const title = 'Project Details';
 
-    res.render('project', {title, projectDetails});
+    res.render('project', {title, projectDetails, canLeave});
 };
 
 const showNewProjectForm = async (req, res) => {

@@ -13,6 +13,21 @@
             <p>Hosted By:</p>
             <p><a href="/organization/<%= projectDetails.organization_id %>"><%= projectDetails.organization_name %></a></p>
         </div>
+
+        <% if (user && !canLeave) { %>
+        <form action="/project/<%= projectDetails.service_project_id%>/volenteer" method="POST">
+            <button type="submit" class="volenteer">
+                Volunteer for this project
+            </button>
+        </form>
+        <% } else if (user && canLeave) { %>
+            <form action="/project/<%= projectDetails.service_project_id%>/leave" method="POST">
+            <button type="submit" class="unvolenteer">
+                Leave this project
+            </button>
+        </form>
+
+        <% } %>
     
     <% if (user && user.role === 'admin') { %>
         <p><a href="/assign-categories/<%= projectDetails.service_project_id %>">Edit Categories</a></p>

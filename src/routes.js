@@ -18,7 +18,7 @@ import { showCategoriesPage, showProjectCategories, showAssignCategoriesForm, pr
 
 // import from user
 
-import { showUserRegistrationForm, processUserRegistrationForm, processLoginForm, processLogout, showLoginForm, requireLogin, showDashboard, requireRole, showUsers } from './controllers/users.js';
+import { showUserRegistrationForm, processUserRegistrationForm, processLoginForm, processLogout, showLoginForm, requireLogin, showDashboard, requireRole, showUsers, processVolenteer, processUnvolenteer } from './controllers/users.js';
 
 import { testErrorPage } from './controllers/errors.js';
 
@@ -50,6 +50,9 @@ router.get('/new-project', requireRole('admin'), showNewProjectForm);
 router.post('/new-project', requireRole('admin'), projectValidation, processNewProjectForm);
 router.get('/update-project/:id', requireRole('admin'), showEditProjectForm);
 router.post('/update-project/:id', requireRole('admin'), projectValidation, processEditProjectForm);
+router.post('/project/:id/volenteer', requireLogin, processVolenteer);
+router.post('/project/:id/leave', requireLogin, processUnvolenteer);
+
 
 //#endregion
 
