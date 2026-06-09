@@ -13,7 +13,26 @@
                 <p>Email: <%= user.email %></p>
                 <p>Role: <%= user.role %></p>
                 <h3>Projects</h3>
+
+                <% if (user.projects.length <= 0) { %>
+                    <p>Nothing's here...</p>
+                
+                <% } %>
+
+                <% user.projects.forEach(project => { %>
+
+                    <form action="/users/remove" method="POST" class="user-form">
+                        <input type="hidden" name="project_id" value="<%= project.project_id %>">
+                        <input type="hidden" name="user_id" value="<%= user.user_id %>">
+                        <button type="submit" class="unvolenteer">
+                            Remove from <%= project.title %>
+                        </button>
+                    </form>
+
+                <% }); %>
             </div>
+
+
 
         <% }); %>
 

@@ -65,6 +65,7 @@ const getAllUsers = async () => {
         SELECT
         u.name,
         u.email,
+        u.user_id,
         r.name AS role
         FROM users u
 

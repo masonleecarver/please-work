@@ -25,22 +25,15 @@ const showDashboard = async (req, res) => {
 
 const showUsers = async (req, res) => {
     const users = await getAllUsers();
+    for (const user of users) {
+        user.projects = await getProjectsByVolenteer(user.user_id);
+    }
+
     res.render('users', {
         title: 'Users',
         users
     });
 };
-
-const showUserProjects = async (req, res) => {
-    const user_id = req.params.id;
-    const projects = await getProjectsByVolenteer(user_id);
-    res.render('user-projects', {
-        title: "User Projects",
-        projects
-    });
-
-}
-
 
 //#region process
 
@@ -110,7 +103,7 @@ const processVolenteer = async (req, res) => {
     try {
         await addUserToProject(project_id, user.user_id);
         req.flash('success', 'Thank you for volenteering!');
-        res.redirect(`/project/${project_id}`);
+        res.redirect(`/dashboard`);
     } catch (error) {
         console.error('Error during volenteering: ', error);
         req.flash('error', 'There was an error. Sorry :(');
@@ -133,6 +126,20 @@ const processUnvolenteer = async (req, res) => {
         res.redirect('/projects');
     }
     
+};
+
+const processKickOutOfProject = async (req, res) => {
+    const {user_id, project_id} = req.body;
+
+    try {
+        await leaveProject(user_id, project_id);
+        req.flash('success', 'User was removed from project.');
+        res.redirect(`/users`);
+    } catch (error) {
+        console.error('There was an error: ', error);
+        req.flash('error', 'Error kicking them out. It is a sign they should stay :)');
+        res.redirect('/users');
+    }
 };
 
 //#endregion
@@ -168,4 +175,4 @@ const requireRole = (role) => {
 
 //#endregion
 
-export { showUserRegistrationForm, processUserRegistrationForm, processLoginForm, showLoginForm, processLogout, requireLogin, showDashboard, requireRole, showUsers, processVolenteer, processUnvolenteer };
+export { showUserRegistrationForm, processUserRegistrationForm, processLoginForm, showLoginForm, processLogout, requireLogin, showDashboard, requireRole, showUsers, processVolenteer, processUnvolenteer, processKickOutOfProject };

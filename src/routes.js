@@ -18,7 +18,7 @@ import { showCategoriesPage, showProjectCategories, showAssignCategoriesForm, pr
 
 // import from user
 
-import { showUserRegistrationForm, processUserRegistrationForm, processLoginForm, processLogout, showLoginForm, requireLogin, showDashboard, requireRole, showUsers, processVolenteer, processUnvolenteer } from './controllers/users.js';
+import { showUserRegistrationForm, processUserRegistrationForm, processLoginForm, processLogout, showLoginForm, requireLogin, showDashboard, requireRole, showUsers, processVolenteer, processUnvolenteer, processKickOutOfProject } from './controllers/users.js';
 
 import { testErrorPage } from './controllers/errors.js';
 
@@ -79,6 +79,7 @@ router.post('/login', processLoginForm);
 router.get('/logout', processLogout);
 router.get('/dashboard', requireLogin, showDashboard);
 router.get('/users', requireRole('admin'), showUsers);
+router.post('/users/remove', requireRole('admin'), processKickOutOfProject);
 
 //#endregion
 
