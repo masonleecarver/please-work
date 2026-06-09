@@ -237,6 +237,7 @@ form button:hover {
 }
 
 .dash-form, .user-form {
+    display: inline;
     width: fit-content;
     background: none;
     padding: 0;
@@ -256,6 +257,7 @@ form button:hover {
 }
 
 .user-form button {
+    display: block;
     margin-bottom: 10px;
     justify-self: center;
 }
